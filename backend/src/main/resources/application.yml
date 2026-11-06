@@ -1,0 +1,23 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: ai-sandbox-agent
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:agentdb}
+    username: ${SPRING_DATASOURCE_USERNAME:sa}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER:org.h2.Driver}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+app:
+  username: ${APP_USERNAME:admin}
+  password: ${APP_PASSWORD:change-this-password}
+  ai:
+    base-url: ${AI_BASE_URL:https://api.openai.com}
+    api-key: ${AI_API_KEY:}
+    model: ${AI_MODEL:gpt-4o-mini}
+  sandbox:
+    enabled: ${SANDBOX_ENABLED:true}
