@@ -23,9 +23,11 @@ public class AiPlanner {
     List<String> steps=Arrays.stream(s.split("\\R")).map(x->x.replaceFirst("^\\s*\\d+[.)-]?\\s*","").trim()).filter(x->!x.isBlank()).limit(8).toList();
     if(!steps.isEmpty())return new Plan("LLM",steps);
    }
-  }catch(Exception ignored){return demo("DEMO_FALLBACK");}
-  return demo("DEMO_FALLBACK");
- }
+  }catch(Exception e){
+    System.err.println("OPENAI API ERROR:");
+    e.printStackTrace();
+    return demo("DEMO_FALLBACK");
+}
  private Plan demo(String mode){return new Plan(mode,List.of("Understand the requested outcome","Break the work into verifiable steps","Identify required tools and safety constraints","Execute approved operations only","Verify the result and report what happened"));}
  public record Plan(String mode,List<String> steps){}
 }
